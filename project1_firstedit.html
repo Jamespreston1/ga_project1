@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Keyboard</title>
+    
+  </head>
+  <style>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100vh;
+    background: whitesmoke;
+    font-size: 1.5rem;
+  }
+
+  .textContainer {
+    width: 90vw;
+    height: 25vw;
+    background: white;
+    box-shadow: 0 0 20px grey;
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: scroll;
+  }
+
+  .keyboard {
+    height: 60vh;
+    width: 70vw;
+    background: darkgrey;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  .space {
+    width: 50%;
+    height: 2rem;
+    background: grey;
+    justify-content: center;
+  }
+
+  .secondLast {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .key {
+    padding: 0.5rem;
+    border-radius: 2px;
+  }
+
+  .key:active {
+    background: white;
+  }
+
+  .active {
+    background: whitesmoke;
+  }
+</style>
+
+  </style>
+  <body>
+<div class = "textContainer"> 
+
+</div>
+<div class = "keyboard">
+<div class="row">
+    <div class="key">1</div>
+    <div class="key">2</div>
+    <div class="key">3</div>
+    <div class="key">4</div>
+    <div class="key">5</div>
+    <div class="key">6</div>
+    <div class="key">7</div>
+    <div class="key">8</div>
+    <div class="key">9</div>
+    <div class="key">0</div>
+    <div class="key delete">Del</div>
+</div>
+
+<div class="row">
+    <div class="key">Q</div>
+    <div class="key">W</div>
+    <div class="key">E</div>
+    <div class="key">R</div>
+    <div class="key">T</div>
+    <div class="key">Y</div>
+    <div class="key">U</div>
+    <div class="key">I</div>
+    <div class="key">O</div>
+    <div class="key">P</div>
+</div>
+<div class="row">
+    <div class="CapsLock">CapsLock</div>
+    <div class="key">A</div>
+    <div class="key">S</div>
+    <div class="key">D</div>
+    <div class="key">F</div>
+    <div class="key">G</div>
+    <div class="key">H</div>
+    <div class="key">J</div>
+    <div class="key">K</div>
+    <div class="key">L</div>
+    <div class="key return">Return</div>
+</div>
+<div class="row">
+    <div class="keys">Z</div>
+    <div class="keys">X</div>
+    <div class="keys">C</div>
+    <div class="keys">V</div>
+    <div class="keys">B</div>
+    <div class="keys">N</div>
+    <div class="keys">M</div>
+</div>
+<div class="row secondLast"></div>
+<div class="key space"></div>
+</div>
+
+    <script>
+let textContainer = document.querySelector(".textContainer");
+let enterKey = document.querySelector('.return');
+let spaceKey = document.querySelector(".space");
+let deleteKey = document.querySelector(".delete");
+let capsLock = document.querySelector('.CapsLock');
+let allKeys = document.querySelectorAll(".key");
+let isCaps = false;
+
+enterKey.addEventListener('click', function () {
+  let content = textContainer.innerText;
+  let newContent = content + "\n";
+  textContainer.innerText = newContent;
+});
+
+spaceKey.addEventListener("click", function () {
+  let content = textContainer.innerText;
+  let newContent = content + " ";
+  textContainer.innerText = newContent;
+});
+
+deleteKey.addEventListener('click', function () {
+  let content = textContainer.innerText;
+  let newContent = content.slice(0, content.length - 1);
+  textContainer.innerText = newContent;
+});
+
+capsLock.addEventListener('click', function () {
+  if (isCaps) {
+    capsLock.classList.remove("active");
+  } else {
+    capsLock.classList.add("active");
+  }
+  isCaps = !isCaps;
+});
+
+for (let key of allKeys) {
+  if (key.classList.contains('delete') || key.classList.contains('return') || key.classList.contains('CapsLock')) {
+    continue;
+  }
+  key.addEventListener('click', function () {
+    if (isCaps) {
+      textContainer.innerText += key.innerText.toUpperCase();
+    } else {
+      textContainer.innerText += key.innerText.toLowerCase();
+    }
+  });
+}
+
+
+    </script>
+  </body>
+
+</html>
